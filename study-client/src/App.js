@@ -27,7 +27,7 @@ class App extends Component {
 
         <Route
           path='/'
-          render={() => !this.props.username && this.props.location.pathname !== '/login' && <Redirect to='/login' />}
+          render={() => !this.props.userData && this.props.location.pathname !== '/login' && <Redirect to='/login' />}
         />
 
         <Route
@@ -64,7 +64,7 @@ function stateToProps(state) {
 
   return {
 
-    username: state.username
+    userData: state.userData
 
   }
 

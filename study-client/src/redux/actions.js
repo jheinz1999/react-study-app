@@ -17,6 +17,7 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const UPDATE_IMG = 'UPDATE_IMG';
 
 export const checkEmail = email => dispatch => {
 
@@ -118,5 +119,11 @@ export const logout = () => {
     type: LOGOUT
 
   }
+
+}
+
+export const updateUsrImg = img => dispatch => {
+
+  alert('this feature is not ready yet.');
 
 }

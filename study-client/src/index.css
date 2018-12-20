@@ -72,6 +72,13 @@ h1 {
 
 }
 
+h2 {
+
+	font-weight: bold;
+	font-size: 2rem;
+
+}
+
 h3 {
 
   font-size: 1.8rem;
@@ -81,5 +88,11 @@ h3 {
 p {
 
   font-size: 1.6rem;
+
+}
+
+button {
+
+	cursor: pointer;
 
 }

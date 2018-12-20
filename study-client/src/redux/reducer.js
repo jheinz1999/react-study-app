@@ -6,7 +6,7 @@ LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './actions';
 const initialState = {
 
   emailStatus: null,
-  username: null,
+  userData: null,
   loginStatus: EMAIL,
   signupStatus: null,
   email: null,
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
 
       localStorage.user = JSON.stringify(action.payload);
-      return {...state, username: action.payload.user.username, loginStatus: LOGGED_IN}
+      return {...state, userData: action.payload, loginStatus: LOGGED_IN}
 
     case SIGNUP_FAIL:
 
