@@ -63,7 +63,7 @@ class UsernameForm extends React.Component {
 
       <form className='username-form' onSubmit={this.handleSubmit}>
 
-        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} autoComplete='off' /><br/>
+        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} autoComplete='off' required /><br/>
         {this.state.checkingEmail && <p className='check'>Checking Email...</p>}
         {this.state.showFail && <p className='invalid'>Invalid email!</p>}
 

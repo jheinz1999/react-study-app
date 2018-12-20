@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { login, acknowledge, FAILURE } from '../redux/actions';
+import { login, acknowledge, setLoginStatus, EMAIL, FAILURE } from '../redux/actions';
 
 import './UsernameForm.scss';
 
@@ -62,13 +62,13 @@ class PasswordForm extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} /><br/>
+        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} required /><br/>
         {this.state.checking && <p>Authenticating...</p>}
         {this.state.showIncorrect && <p className='invalid'>Incorrect password!</p>}
 
         <div className='btns'>
 
-          <span>Go back</span>
+          <span onClick={() => this.props.setLoginStatus(EMAIL)}>Go back</span>
           <button>Next</button>
 
         </div>
@@ -92,4 +92,4 @@ function stateToProps(state) {
 
 }
 
-export default connect(stateToProps, { login, acknowledge })(PasswordForm);
+export default connect(stateToProps, { login, acknowledge, setLoginStatus })(PasswordForm);
