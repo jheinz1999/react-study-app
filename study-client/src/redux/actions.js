@@ -18,6 +18,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const UPDATE_IMG = 'UPDATE_IMG';
+export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
+export const GET_POSTS_FAIL = 'GET_POSTS_FAIL';
 
 export const checkEmail = email => dispatch => {
 
@@ -125,5 +127,18 @@ export const logout = () => {
 export const updateUsrImg = img => dispatch => {
 
   alert('this feature is not ready yet.');
+
+}
+
+export const fetchPosts = () => dispatch => {
+
+  axios.get('https://lambda-study-app.herokuapp.com/api/posts')
+    .then(res => dispatch({
+      type: GET_POSTS_SUCCESS,
+      payload: res.data
+    }))
+    .catch(err => dispatch({
+      type: GET_POSTS_FAIL
+    }));
 
 }
