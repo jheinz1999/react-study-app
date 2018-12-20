@@ -1,13 +1,12 @@
 // reducer.js - global reducer for redux store
 
 import { EMAIL_CHECK, SUCCESS, FAILURE, ACKNOWLEDGEMENT, EMAIL, PASSWORD, SIGNUP, LOGGED_IN, LOGIN_STATUS, SIGNUP_SUCCESS, SIGNUP_FAIL,
-LOGIN_SUCCESS, LOGIN_FAIL } from './actions';
+LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './actions';
 
 const initialState = {
 
   emailStatus: null,
   username: null,
-  loggedIn: false,
   loginStatus: EMAIL,
   signupStatus: null,
   email: null,
@@ -34,7 +33,7 @@ export default (state = initialState, action) => {
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
 
-      localStorage.token = action.payload.token;
+      localStorage.user = JSON.stringify(action.payload);
       return {...state, username: action.payload.user.username, loginStatus: LOGGED_IN}
 
     case SIGNUP_FAIL:
@@ -44,6 +43,12 @@ export default (state = initialState, action) => {
     case LOGIN_FAIL:
 
       return {...state, passwordStatus: FAILURE}
+
+    case LOGOUT:
+
+      localStorage.clear();
+      console.log("LOGGED OUT");
+      return {...state, username: null, loginStatus: EMAIL}
 
     default:
       return state;

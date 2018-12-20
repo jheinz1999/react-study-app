@@ -16,6 +16,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
 
 export const checkEmail = email => dispatch => {
 
@@ -89,11 +90,32 @@ export const login = (email, password) => dispatch => {
 
 }
 
+export const loginToken = obj => {
+
+  return {
+
+    type: LOGIN_SUCCESS,
+    payload: obj
+
+  }
+
+}
+
 export const acknowledge = () => {
 
   return {
 
     type: ACKNOWLEDGEMENT
+
+  }
+
+}
+
+export const logout = () => {
+
+  return {
+
+    type: LOGOUT
 
   }
 

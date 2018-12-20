@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { EMAIL, PASSWORD, SIGNUP, LOGGED_IN } from '../redux/actions';
+import { EMAIL, PASSWORD, SIGNUP, LOGGED_IN, loginToken } from '../redux/actions';
 
 import UsernameForm from '../components/UsernameForm';
 import PasswordForm from '../components/PasswordForm';
@@ -12,12 +12,12 @@ import SignupForm from '../components/SignupForm';
 
 import './LoginView.scss';
 
-function LoginView({loginStatus}) {
+function LoginView({loginStatus, loginToken}) {
 
   console.log(loginStatus);
 
   if (localStorage.user)
-    return <h1>Logged in!</h1>
+    loginToken(JSON.parse(localStorage.user));
 
   return (
 
@@ -47,4 +47,4 @@ function stateToProps(state) {
 
 }
 
-export default connect(stateToProps, null)(LoginView);
+export default connect(stateToProps, { loginToken })(LoginView);

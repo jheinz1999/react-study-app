@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function NavBar() {
+import { logout } from '../redux/actions';
+
+function NavBar({logout}) {
 
   return (
 
@@ -10,6 +13,7 @@ function NavBar() {
       <NavLink to='/dashboard'>Dashboard</NavLink>
       <NavLink to='/board'>Forum</NavLink>
       <NavLink to='/quizzes'>Quizzes</NavLink>
+      <span onClick={() => logout()}>Log Out</span>
 
     </nav>
 
@@ -17,4 +21,4 @@ function NavBar() {
 
 }
 
-export default NavBar;
+export default connect(null, { logout })(NavBar);
