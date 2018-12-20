@@ -2,15 +2,23 @@
 
 import React from 'react';
 
+import NavBar from '../components/NavBar';
+
 function ForumView() {
 
   return (
 
-    <div className='forum'>
+    <>
 
-      <h1>Forum!</h1>
+      <NavBar />
 
-    </div>
+      <div className='forum'>
+
+        <h1>Forum!</h1>
+
+      </div>
+
+    </>
 
   );
 

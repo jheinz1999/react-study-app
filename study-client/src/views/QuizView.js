@@ -2,15 +2,23 @@
 
 import React from 'react';
 
+import NavBar from '../components/NavBar';
+
 function QuizView() {
 
   return (
 
-    <div className='quiz'>
+    <>
 
-      <h1>Quiz!</h1>
+      <NavBar />
 
-    </div>
+      <div className='quiz'>
+
+        <h1>Quiz!</h1>
+
+      </div>
+
+    </>
 
   );
 
