@@ -16,7 +16,7 @@ class App extends Component {
 
           <Route
             path='/'
-            render={() => <Redirect to='/login' />}
+            render={() => !localStorage.token && <Redirect to='/login' />}
           />
 
           <Route

@@ -7,10 +7,15 @@ export const FAILURE = 'FAILURE';
 export const EMAIL = 'EMAIL';
 export const PASSWORD = 'PASSWORD';
 export const SIGNUP = 'SIGNUP';
+export const LOGGED_IN = 'LOGGED_IN';
 
 export const EMAIL_CHECK = 'EMAIL_CHECK';
 export const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 export const LOGIN_STATUS = 'LOGIN_STATUS';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 export const checkEmail = email => dispatch => {
 
@@ -24,11 +29,17 @@ export const checkEmail = email => dispatch => {
   axios.post('https://lambda-study-app.herokuapp.com/api/auth/login', checker)
     .then(res => dispatch({
       type: EMAIL_CHECK,
-      payload: res.status
+      payload: {
+        status: res.status,
+        email: email
+      }
     }))
     .catch(err => dispatch({
       type: EMAIL_CHECK,
-      payload: err.response.status
+      payload:  {
+        status: err.response.status,
+        email: email
+      }
     }));
 
 }
@@ -41,6 +52,40 @@ export const setLoginStatus = status => {
     payload: status
 
   }
+
+}
+
+export const signUp = (username, email, password) => dispatch => {
+
+  axios.post('https://lambda-study-app.herokuapp.com/api/auth/register', {
+    username: username,
+    email: email,
+    password: password
+  })
+  .then(res => dispatch({
+    type: SIGNUP_SUCCESS,
+    payload: res.data
+  }))
+  .catch(err => dispatch({
+    type: SIGNUP_FAIL,
+    payload: err
+  }));
+
+}
+
+export const login = (email, password) => dispatch => {
+
+  axios.post('https://lambda-study-app.herokuapp.com/api/auth/login', {
+    email: email,
+    password: password
+  })
+  .then(res => dispatch({
+    type: LOGIN_SUCCESS,
+    payload: res.data
+  }))
+  .catch(err => dispatch({
+    type: LOGIN_FAIL
+  }));
 
 }
 

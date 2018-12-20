@@ -2,10 +2,13 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import { EMAIL, PASSWORD, SIGNUP } from '../redux/actions';
+import { EMAIL, PASSWORD, SIGNUP, LOGGED_IN } from '../redux/actions';
 
 import UsernameForm from '../components/UsernameForm';
+import PasswordForm from '../components/PasswordForm';
+import SignupForm from '../components/SignupForm';
 
 function LoginView({loginStatus}) {
 
@@ -19,8 +22,9 @@ function LoginView({loginStatus}) {
     <div className='login'>
 
       {loginStatus === EMAIL && <UsernameForm />}
-      {loginStatus === PASSWORD && }
-      {loginStatus === SIGNUP && <h1>Sign Up</h1>}
+      {loginStatus === PASSWORD && <PasswordForm />}
+      {loginStatus === SIGNUP && <SignupForm />}
+      {loginStatus === LOGGED_IN && <Redirect to='/dashboard' />}
 
     </div>
 
