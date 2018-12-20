@@ -62,7 +62,7 @@ class PasswordForm extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} required /><br/>
+        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} autoFocus required /><br/>
         {this.state.checking && <p>Authenticating...</p>}
         {this.state.showIncorrect && <p className='invalid'>Incorrect password!</p>}
 

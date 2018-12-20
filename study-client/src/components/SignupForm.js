@@ -65,7 +65,7 @@ class SignupForm extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChange} required /><br/>
+        <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChange} autoFocus required /><br/>
         <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} required /><br/>
         <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} required /><br/>
         <input type='password' name='password2' placeholder='password' value={this.state.password2} onChange={this.handleChange} required /><br/>
