@@ -1,0 +1,35 @@
+.navbar {
+
+  width: 100%;
+  background-color: #1f872c;
+  display: flex;
+  justify-content: space-between;
+
+  .nav-item {
+
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+
+      background-color: lighten(#1f872c, 10%);
+      cursor: pointer;
+
+    }
+
+    &:first-child {
+
+      margin-left: 30px;
+
+    }
+
+    &:last-child {
+
+      margin-right: 30px;
+
+    }
+
+  }
+
+}

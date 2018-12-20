@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 
 import { logout } from '../redux/actions';
 
+import './NavBar.scss';
+
 function NavBar({logout}) {
 
   return (
 
-    <nav>
+    <nav className='navbar'>
 
-      <NavLink to='/dashboard'>Dashboard</NavLink>
-      <NavLink to='/board'>Forum</NavLink>
-      <NavLink to='/quizzes'>Quizzes</NavLink>
-      <span onClick={() => logout()}>Log Out</span>
+      <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
+      <NavLink className='nav-item' to='/board'>Forum</NavLink>
+      <NavLink className='nav-item' to='/quizzes'>Quizzes</NavLink>
+      <span className='nav-item' onClick={() => logout()}>Log Out</span>
 
     </nav>
 
