@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { checkEmail, acknowledge, setLoginStatus, SUCCESS, FAILURE, SIGNUP, PASSWORD } from '../redux/actions';
 
+import './UsernameForm.scss';
+
 class UsernameForm extends React.Component {
 
   constructor() {
@@ -59,13 +61,18 @@ class UsernameForm extends React.Component {
 
     return (
 
-      <form onSubmit={this.handleSubmit}>
+      <form className='username-form' onSubmit={this.handleSubmit}>
 
-        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} />
-        {this.state.checkingEmail && <p>Checking Email...</p>}
-        {this.state.showFail && <p>Invalid email!</p>}
-        <span className='signup' onClick={() => this.props.setLoginStatus(SIGNUP)}>Sign Up</span>
-        <button>Next</button>
+        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} autoComplete='off' /><br/>
+        {this.state.checkingEmail && <p className='check'>Checking Email...</p>}
+        {this.state.showFail && <p className='invalid'>Invalid email!</p>}
+
+        <div className='btns'>
+
+          <span className='signup' onClick={() => this.props.setLoginStatus(SIGNUP)}>Sign Up</span>
+          <button>Next</button>
+
+        </div>
 
       </form>
 

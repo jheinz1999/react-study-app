@@ -1,0 +1,76 @@
+form {
+
+  width: 100%;
+  text-align: center;
+
+  input {
+
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin: auto;
+
+  }
+
+  p {
+
+    margin-top: 10px;
+
+  }
+
+  .invalid {
+
+    color: red;
+
+  }
+
+  .btns {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    span {
+
+      color: purple;
+      text-decoration: underline;
+      font-size: 1.4rem;
+      cursor: pointer;
+
+      &:hover {
+
+        color: lighten(purple, 10%);
+
+      }
+
+    }
+
+    button {
+
+      cursor: pointer;
+      padding: 5px 15px;
+      background-color: #3175ce;
+      border: 1px solid #3175ce;
+      border-radius: 5px;
+      color: white;
+      margin: 10px 0;
+
+      &:hover {
+
+        background-color: lighten(#3175ce, 10%)
+
+      }
+
+    }
+
+    p {
+
+
+
+    }
+
+  }
+
+}

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { login, acknowledge, FAILURE } from '../redux/actions';
 
+import './UsernameForm.scss';
+
 class PasswordForm extends React.Component {
 
   constructor() {
@@ -60,10 +62,16 @@ class PasswordForm extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} />
-        <button>Next</button>
+        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} /><br/>
         {this.state.checking && <p>Authenticating...</p>}
-        {this.state.showIncorrect && <p>Incorrect password!</p>}
+        {this.state.showIncorrect && <p className='invalid'>Incorrect password!</p>}
+
+        <div className='btns'>
+
+          <span>Go back</span>
+          <button>Next</button>
+
+        </div>
 
       </form>
 

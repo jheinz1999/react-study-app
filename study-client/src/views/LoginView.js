@@ -10,6 +10,8 @@ import UsernameForm from '../components/UsernameForm';
 import PasswordForm from '../components/PasswordForm';
 import SignupForm from '../components/SignupForm';
 
+import './LoginView.scss';
+
 function LoginView({loginStatus}) {
 
   console.log(loginStatus);
@@ -20,6 +22,9 @@ function LoginView({loginStatus}) {
   return (
 
     <div className='login'>
+
+      <h1>Lambda Study App</h1>
+      <h3>Sign in!</h3>
 
       {loginStatus === EMAIL && <UsernameForm />}
       {loginStatus === PASSWORD && <PasswordForm />}
