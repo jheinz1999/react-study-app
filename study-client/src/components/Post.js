@@ -1,15 +1,16 @@
 import React from 'react';
 import moment from 'moment';
+import { withRouter } from 'react-router-dom';
 
 import './Post.scss';
 
-function Post({post}) {
+function Post({post, history}) {
 
-  const { title, body, created_at, author } = post;
+  const { id, title, created_at, author } = post;
 
   return (
 
-    <div className='post'>
+    <div className='post' onClick={() => history.push(`/post/${id}`)}>
 
       <div>
 
@@ -17,7 +18,7 @@ function Post({post}) {
         <p>By {author}</p>
 
       </div>
-      
+
       <p>{moment(created_at).fromNow()}</p>
 
     </div>
@@ -26,4 +27,4 @@ function Post({post}) {
 
 }
 
-export default Post;
+export default withRouter(Post);

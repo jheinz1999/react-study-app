@@ -14,7 +14,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
 
-    if (!this.props.username && prevProps.username) {
+    if (!this.props.userData && prevProps.userData) {
       this.props.history.push('/login');
     }
 

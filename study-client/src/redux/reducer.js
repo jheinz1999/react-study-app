@@ -48,8 +48,7 @@ export default (state = initialState, action) => {
     case LOGOUT:
 
       localStorage.clear();
-      console.log("LOGGED OUT");
-      return {...state, username: null, loginStatus: EMAIL}
+      return {...state, userData: null, loginStatus: EMAIL}
 
     case GET_POSTS_SUCCESS:
 
