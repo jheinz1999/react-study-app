@@ -8,6 +8,12 @@ import './NavBar.scss';
 
 function NavBar({logout}) {
 
+  function toggleLinks() {
+
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.toggle('visible'));
+
+  }
+
   return (
 
     <nav className='navbar'>
@@ -16,6 +22,7 @@ function NavBar({logout}) {
       <NavLink className='nav-item' to='/board'>Forum</NavLink>
       <NavLink className='nav-item' to='/quizzes'>Quizzes</NavLink>
       <span className='nav-item' onClick={() => logout()}>Log Out</span>
+      <i className='nav-item fa fa-bars' onClick={() => toggleLinks()}></i>
 
     </nav>
 

@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import reducer from './redux/reducer';
+
+import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 
 const store = createStore(reducer, applyMiddleware(thunk));
