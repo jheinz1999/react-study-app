@@ -8,7 +8,7 @@ import { deletePost, acknowledge, addComment, SUCCESS, FAILURE } from '../redux/
 
 import './PostView.scss';
 
-function PostView({match, history, userData, deletePost, deleteStatus, commentStatus, addComment, acknowledge}) {
+function PostView({match, history, userData, deletePost, deleteStatus, commentDeleted, commentStatus, addComment, acknowledge}) {
 
   const [post, setPost] = useState(null);
   const [postLoaded, setPostLoaded] = useState(false);
@@ -73,10 +73,22 @@ function PostView({match, history, userData, deletePost, deleteStatus, commentSt
 
       acknowledge();
       setComment('');
+      setCommentsLoaded(false);
 
     }
 
   }, [commentStatus]);
+
+  useEffect(() => {
+
+    if (commentDeleted !== null && commentDeleted) {
+
+      acknowledge();
+      setCommentsLoaded(false);
+
+    }
+
+  }, [commentDeleted]);
 
   const loading = {
     author: {
@@ -136,7 +148,8 @@ function stateToProps(state) {
 
     userData: state.userData,
     deleteStatus: state.deleteStatus,
-    commentStatus: state.commentStatus
+    commentStatus: state.commentStatus,
+    commentDeleted: state.commentDeleted
 
   }
 

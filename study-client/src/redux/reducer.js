@@ -2,7 +2,7 @@
 
 import { EMAIL_CHECK, SUCCESS, FAILURE, ACKNOWLEDGEMENT, EMAIL, PASSWORD, SIGNUP, LOGGED_IN, LOGIN_STATUS, SIGNUP_SUCCESS, SIGNUP_FAIL,
 LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_POSTS_SUCCESS, GET_POSTS_FAIL, ADD_POST_SUCCESS, ADD_POST_FAIL, DELETE_POST,
-COMMENT_SUCCESS } from './actions';
+COMMENT_SUCCESS, COMMENT_DELETE } from './actions';
 
 const initialState = {
 
@@ -15,7 +15,8 @@ const initialState = {
   posts: null,
   addStatus: null,
   deleteStatus: null,
-  commentStatus: null
+  commentStatus: null,
+  commentDeleted: true
 
 }
 
@@ -30,7 +31,7 @@ export default (state = initialState, action) => {
     case ACKNOWLEDGEMENT:
 
       return {...state, emailStatus: null, signupStatus: null, passwordStatus: null, addStatus: null,
-        deleteStatus: null, commentStatus: null}
+        deleteStatus: null, commentStatus: null, commentDeleted: null}
 
     case LOGIN_STATUS:
 
@@ -74,6 +75,10 @@ export default (state = initialState, action) => {
     case COMMENT_SUCCESS:
 
       return {...state, commentStatus: SUCCESS}
+
+    case COMMENT_DELETE:
+
+      return {...state, commentDeleted: true}
 
     default:
       return state;

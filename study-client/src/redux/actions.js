@@ -24,6 +24,7 @@ export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAIL = 'ADD_POST_FAIL';
 export const DELETE_POST = 'DELETE_POST';
 export const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
+export const COMMENT_DELETE = 'COMMENT_DELETE';
 
 export const checkEmail = email => dispatch => {
 
@@ -209,6 +210,28 @@ export const addComment = (id, comment) => dispatch => {
   axios.post(`https://lambda-study-app.herokuapp.com/api/posts/${id}/comments`, {text: comment}, options)
     .then(res => dispatch({
       type: COMMENT_SUCCESS
+    }))
+    .catch(err => dispatch({
+      type: LOGOUT
+    }));
+
+}
+
+export const deleteComment = (postID, id) => dispatch => {
+
+  const options = {
+
+    headers: {
+
+      Authorization: JSON.parse(localStorage.user).token
+
+    }
+
+  }
+
+  axios.delete(`https://lambda-study-app.herokuapp.com/api/posts/${postID}/comments/${id}`, options)
+    .then(res => dispatch({
+      type: COMMENT_DELETE
     }))
     .catch(err => dispatch({
       type: LOGOUT
