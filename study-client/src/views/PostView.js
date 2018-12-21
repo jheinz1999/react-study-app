@@ -4,17 +4,32 @@ import { connect } from 'react-redux';
 
 import Comment from '../components/Comment';
 import NavBar from '../components/NavBar';
-import { deletePost, acknowledge, SUCCESS, FAILURE } from '../redux/actions';
+import { deletePost, acknowledge, addComment, SUCCESS, FAILURE } from '../redux/actions';
 
 import './PostView.scss';
 
-function PostView({match, history, userData, deletePost, deleteStatus, acknowledge}) {
+function PostView({match, history, userData, deletePost, deleteStatus, commentStatus, addComment, acknowledge}) {
 
   const [post, setPost] = useState(null);
   const [postLoaded, setPostLoaded] = useState(false);
   const [invalidPost, setInvalidPost] = useState(false);
   const [comments, setComments] = useState(null);
   const [commentsLoaded, setCommentsLoaded] = useState(false);
+  const [comment, setComment] = useState('');
+
+  const handleChange = e => {
+
+    setComment(e.target.value);
+
+  }
+
+  const handleSubmit = e => {
+
+    e.preventDefault();
+
+    addComment(match.params.id, comment);
+
+  }
 
   useEffect(() => {
 
@@ -50,7 +65,18 @@ function PostView({match, history, userData, deletePost, deleteStatus, acknowled
 
     }
 
-  })
+  }, [deleteStatus]);
+
+  useEffect(() => {
+
+    if (commentStatus && commentStatus === SUCCESS) {
+
+      acknowledge();
+      setComment('');
+
+    }
+
+  }, [commentStatus]);
 
   const loading = {
     author: {
@@ -89,6 +115,13 @@ function PostView({match, history, userData, deletePost, deleteStatus, acknowled
         {post && <Comment commentData={op} />}
         {post && commentsLoaded && comments.map((comment, id) => <Comment commentData={comment} key={id} />)}
 
+        <form className='comment-form' onSubmit={handleSubmit}>
+
+          <textarea name='comment' placeholder='add comment...' value={comment} onChange={handleChange} rows='4' /><br/>
+          <button>Add Comment!</button>
+
+        </form>
+
       </div>
 
     </>
@@ -102,10 +135,11 @@ function stateToProps(state) {
   return {
 
     userData: state.userData,
-    deleteStatus: state.deleteStatus
+    deleteStatus: state.deleteStatus,
+    commentStatus: state.commentStatus
 
   }
 
 }
 
-export default connect(stateToProps, { deletePost, acknowledge })(PostView);
+export default connect(stateToProps, { deletePost, acknowledge, addComment })(PostView);

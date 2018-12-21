@@ -1,7 +1,8 @@
 // reducer.js - global reducer for redux store
 
 import { EMAIL_CHECK, SUCCESS, FAILURE, ACKNOWLEDGEMENT, EMAIL, PASSWORD, SIGNUP, LOGGED_IN, LOGIN_STATUS, SIGNUP_SUCCESS, SIGNUP_FAIL,
-LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_POSTS_SUCCESS, GET_POSTS_FAIL, ADD_POST_SUCCESS, ADD_POST_FAIL, DELETE_POST } from './actions';
+LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_POSTS_SUCCESS, GET_POSTS_FAIL, ADD_POST_SUCCESS, ADD_POST_FAIL, DELETE_POST,
+COMMENT_SUCCESS } from './actions';
 
 const initialState = {
 
@@ -13,7 +14,8 @@ const initialState = {
   passwordStatus: null,
   posts: null,
   addStatus: null,
-  deleteStatus: null
+  deleteStatus: null,
+  commentStatus: null
 
 }
 
@@ -27,7 +29,8 @@ export default (state = initialState, action) => {
 
     case ACKNOWLEDGEMENT:
 
-      return {...state, emailStatus: null, signupStatus: null, passwordStatus: null, addStatus: null, deleteStatus: null}
+      return {...state, emailStatus: null, signupStatus: null, passwordStatus: null, addStatus: null,
+        deleteStatus: null, commentStatus: null}
 
     case LOGIN_STATUS:
 
@@ -67,6 +70,10 @@ export default (state = initialState, action) => {
     case DELETE_POST:
 
       return {...state, deleteStatus: SUCCESS}
+
+    case COMMENT_SUCCESS:
+
+      return {...state, commentStatus: SUCCESS}
 
     default:
       return state;
