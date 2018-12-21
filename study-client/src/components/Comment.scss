@@ -8,20 +8,27 @@
   border: 1px solid lightgrey;
   border-radius: 5px;
 
+  @media (max-width: 750px) {
+
+    flex-direction: column;
+
+  }
+
   .info {
 
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: darken(lightgrey, 10%);
-    width: 20%;
     position: relative;
-    padding: 10px;
+    padding: 10px 20px;
 
     .img {
 
       width: 50px;
       height: 50px;
-      margin: 10px 0;
+      margin: 10px 50px;
       border-radius: 50%;
       overflow: hidden;
 
@@ -37,6 +44,12 @@
 
       margin: 0 10px;
 
+      p {
+
+        text-align: center;
+
+      }
+
     }
 
   }
@@ -46,7 +59,6 @@
     display: flex;
     align-items: center;
     padding: 20px 10px;
-    width: 80%;
 
   }
 
