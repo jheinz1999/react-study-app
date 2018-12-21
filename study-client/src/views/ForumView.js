@@ -1,6 +1,7 @@
 // forum view
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import NavBar from '../components/NavBar';
 import ForumPosts from '../components/ForumPosts';
@@ -20,6 +21,7 @@ function ForumView() {
         <div className='forum-header'>
 
           <h1>Forum</h1>
+          <Link to='/create/post'>+Create Post</Link>
 
         </div>
 

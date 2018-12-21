@@ -22,10 +22,12 @@ function ForumPosts({posts, fetchPosts}) {
   if (!posts)
     return <Post loading />
 
+
+
   return (
 
     <>
-      {posts.map((post, id) => <Post key={id} post={post} />)}
+      {posts.reverse().map((post, id) => <Post key={id} post={post} />)}
     </>
 
   );

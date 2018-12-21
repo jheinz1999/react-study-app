@@ -20,6 +20,8 @@ export const LOGOUT = 'LOGOUT';
 export const UPDATE_IMG = 'UPDATE_IMG';
 export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 export const GET_POSTS_FAIL = 'GET_POSTS_FAIL';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAIL = 'ADD_POST_FAIL';
 
 export const checkEmail = email => dispatch => {
 
@@ -139,6 +141,31 @@ export const fetchPosts = () => dispatch => {
     }))
     .catch(err => dispatch({
       type: GET_POSTS_FAIL
+    }));
+
+}
+
+export const addPost = post => dispatch => {
+
+  const options = {
+
+    headers: {
+
+      Authorization: JSON.parse(localStorage.user).token
+
+    }
+
+  }
+
+  axios.post('https://lambda-study-app.herokuapp.com/api/posts', post, options)
+    .then(res => dispatch({
+      type: ADD_POST_SUCCESS,
+      payload: res.status
+    }))
+    .catch(err => err.response.status == 401 ? dispatch({
+      type: LOGOUT
+    }) : dispatch({
+      type: ADD_POST_FAIL
     }));
 
 }
