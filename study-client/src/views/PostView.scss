@@ -11,11 +11,28 @@
     background-color: white;
     border: 1px solid white;
     border-radius: 10px;
+    position: relative;
 
     h1 {
 
       text-align: center;
       margin: 10px 0;
+
+    }
+
+    span {
+
+      position: absolute;
+      top: 12px;
+      right: 5px;
+      font-size: 1.4rem;
+
+      &:hover {
+
+        cursor: pointer;
+        color: grey;
+
+      }
 
     }
 

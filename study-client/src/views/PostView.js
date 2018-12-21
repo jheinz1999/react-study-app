@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 import Comment from '../components/Comment';
 import NavBar from '../components/NavBar';
+import { deletePost, acknowledge, SUCCESS, FAILURE } from '../redux/actions';
 
 import './PostView.scss';
 
-function PostView({match}) {
+function PostView({match, history, userData, deletePost, deleteStatus, acknowledge}) {
 
   const [post, setPost] = useState(null);
   const [postLoaded, setPostLoaded] = useState(false);
@@ -40,6 +41,17 @@ function PostView({match}) {
 
   }, [commentsLoaded]);
 
+  useEffect(() => {
+
+    if (deleteStatus && deleteStatus === SUCCESS) {
+
+      acknowledge();
+      history.push('/board');
+
+    }
+
+  })
+
   const loading = {
     author: {
       username: 'loading...',
@@ -50,7 +62,7 @@ function PostView({match}) {
     created_at: null
   };
 
-  const { author, body, title, created_at } = post ? post : loading;
+  const { author, body, title, created_at, id } = post ? post : loading;
 
   const op = {
     text: body,
@@ -70,6 +82,7 @@ function PostView({match}) {
         <div className='post-header'>
 
           <h1>{post ? title : 'Loading Post...'}</h1>
+          {post && post.author.username === userData.user.username && <span className='fa fa-trash' onClick={() => deletePost(id)}>Delete Post!</span>}
 
         </div>
 
@@ -84,4 +97,15 @@ function PostView({match}) {
 
 }
 
-export default PostView;
+function stateToProps(state) {
+
+  return {
+
+    userData: state.userData,
+    deleteStatus: state.deleteStatus
+
+  }
+
+}
+
+export default connect(stateToProps, { deletePost, acknowledge })(PostView);

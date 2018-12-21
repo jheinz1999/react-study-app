@@ -22,6 +22,7 @@ export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
 export const GET_POSTS_FAIL = 'GET_POSTS_FAIL';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAIL = 'ADD_POST_FAIL';
+export const DELETE_POST = 'DELETE_POST';
 
 export const checkEmail = email => dispatch => {
 
@@ -166,6 +167,28 @@ export const addPost = post => dispatch => {
       type: LOGOUT
     }) : dispatch({
       type: ADD_POST_FAIL
+    }));
+
+}
+
+export const deletePost = id => dispatch => {
+
+  const options = {
+
+    headers: {
+
+      Authorization: JSON.parse(localStorage.user).token
+
+    }
+
+  }
+
+  axios.delete(`https://lambda-study-app.herokuapp.com/api/posts/${id}`, options)
+    .then(res => dispatch({
+      type: DELETE_POST
+    }))
+    .catch(err => dispatch({
+      type: LOGOUT
     }));
 
 }
