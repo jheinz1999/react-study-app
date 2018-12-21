@@ -9,6 +9,7 @@ import DashboardView from './views/DashboardView';
 import QuizzesView from './views/QuizzesView';
 import QuizView from './views/QuizView';
 import ForumView from './views/ForumView';
+import PostView from './views/PostView';
 
 class App extends Component {
 
@@ -53,6 +54,11 @@ class App extends Component {
         <Route
           path='/board'
           render={() => <ForumView />}
+        />
+
+        <Route
+          path='/post/:id'
+          render={props => <PostView {...props} />}
         />
 
       </div>

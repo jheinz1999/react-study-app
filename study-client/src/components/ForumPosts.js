@@ -25,7 +25,7 @@ function ForumPosts({posts, fetchPosts}) {
   return (
 
     <>
-      {posts.map(post => <Post post={post} />)}
+      {posts.map((post, id) => <Post key={id} post={post} />)}
     </>
 
   );

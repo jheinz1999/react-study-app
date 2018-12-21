@@ -6,6 +6,7 @@ import { TweenMax } from 'gsap/TweenMax';
 
 import { updateUsrImg } from '../redux/actions';
 import NavBar from '../components/NavBar';
+import config from '../config';
 
 import './DashboardView.scss';
 
@@ -80,7 +81,7 @@ function DashboardView({userData, updateUsrImg}) {
         <h2>Logged in as: {username}</h2>
 
         <div className='profile-img-container'>
-          <img src={img_url ? img_url : 'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'} />
+          <img src={img_url ? img_url : config.default_img} />
         </div>
 
         <button onClick={() => showModal(true)}>Update Profile Image</button>
