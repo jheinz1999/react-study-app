@@ -4,7 +4,19 @@ import { withRouter } from 'react-router-dom';
 
 import './Post.scss';
 
-function Post({post, history}) {
+function Post({post, history, loading}) {
+
+  if (!post && loading) {
+
+    post = {
+
+      title: 'Loading...',
+      author: 'Loading...',
+      created_at: moment()
+
+    }
+
+  }
 
   const { id, title, created_at, author } = post;
 

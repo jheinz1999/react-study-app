@@ -20,7 +20,7 @@ function ForumPosts({posts, fetchPosts}) {
   }, [fetched]);
 
   if (!posts)
-    return <p>Loading post...</p>
+    return <Post loading />
 
   return (
 
