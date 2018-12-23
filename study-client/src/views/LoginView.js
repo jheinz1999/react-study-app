@@ -14,7 +14,23 @@ import './LoginView.scss';
 
 function LoginView({loginStatus, loginToken}) {
 
-  console.log(loginStatus);
+  let text;
+
+  switch (loginStatus) {
+
+    case EMAIL:
+      text = 'Sign in!';
+      break;
+
+    case PASSWORD:
+      text = 'Enter Password:';
+      break;
+
+    case SIGNUP:
+      text = 'Sign Up!';
+      break;
+
+  }
 
   if (localStorage.user)
     loginToken(JSON.parse(localStorage.user));
@@ -24,7 +40,7 @@ function LoginView({loginStatus, loginToken}) {
     <div className='login'>
 
       <h1>Lambda Study App</h1>
-      <h3>Sign in!</h3>
+      <h3>{text}</h3>
 
       {loginStatus === EMAIL && <UsernameForm />}
       {loginStatus === PASSWORD && <PasswordForm />}

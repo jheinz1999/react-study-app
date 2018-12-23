@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { signUp, acknowledge, SUCCESS, FAILURE } from '../redux/actions';
 
+import './UsernameForm.scss';
+
 class SignupForm extends React.Component {
 
   constructor() {
@@ -63,14 +65,16 @@ class SignupForm extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChange} required />
-        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} required />
-        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} required />
-        <input type='password' name='password2' placeholder='password' value={this.state.password2} onChange={this.handleChange} required />
+        <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChange} required /><br/>
+        <input type='email' name='email' placeholder='email' value={this.state.email} onChange={this.handleChange} required /><br/>
+        <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChange} required /><br/>
+        <input type='password' name='password2' placeholder='password' value={this.state.password2} onChange={this.handleChange} required /><br/>
 
-        {this.state.password === this.state.password2 ? <span className='match'>{this.state.password !== '' && 'Passwords match!'}</span> : <span className='fail'>Passwords do not match.</span>}
+        {this.state.password === this.state.password2 ? <p className='valid'>{this.state.password !== '' && 'Passwords match!'}</p> : <p className='invalid'>Passwords do not match.</p>}
 
-        <button disabled={this.state.password === '' || this.state.password !== this.state.password2 || this.state.username === '' || this.state.email === ''}>Sign up!</button>
+        <div className='btns'>
+          <button className='signup-btn' disabled={this.state.password === '' || this.state.password !== this.state.password2 || this.state.username === '' || this.state.email === ''}>Sign up!</button>
+        </div>
 
         {this.state.signingUp && <p>Signing up...</p>}
         {this.state.showFail && <p>Sign up failed! Try again with a different email or username.</p>}
