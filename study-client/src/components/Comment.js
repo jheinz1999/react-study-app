@@ -7,7 +7,7 @@ import { deleteComment } from '../redux/actions';
 
 import './Comment.scss';
 
-function Comment({commentData, userData, deleteComment}) {
+function Comment({commentData, userData, deleteComment, isFirst}) {
 
   const { author, author_img, created_at, text, post_id, id } = commentData;
 
@@ -36,7 +36,7 @@ function Comment({commentData, userData, deleteComment}) {
 
       </div>
 
-      {author === userData.user.username && <span className='fa fa-trash' onClick={() => deleteComment(post_id, id)}> Delete Comment</span>}
+      {author === userData.user.username && !isFirst && <span className='fa fa-trash' onClick={() => deleteComment(post_id, id)}> Delete Comment</span>}
 
     </div>
 
