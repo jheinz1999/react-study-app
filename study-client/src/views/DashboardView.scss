@@ -17,6 +17,7 @@
 .dashboard {
 
   margin: auto;
+  padding: 10px;
   margin-top: 66px;
   width: 80%;
   background-color: white;
@@ -32,6 +33,24 @@
     margin: 10px 0;
 
   }
+
+  h2 {
+
+    text-align: center;
+
+  }
+
+}
+
+.my-posts {
+
+  background-color: lightgrey;
+  width: 75%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 10px;
 
   h2 {
 

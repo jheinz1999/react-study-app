@@ -4,15 +4,29 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TweenMax } from 'gsap/TweenMax';
 
-import { updateUsrImg } from '../redux/actions';
+import { updateUsrImg, fetchPosts } from '../redux/actions';
 import NavBar from '../components/NavBar';
+import Post from '../components/Post';
 import config from '../config';
 
 import './DashboardView.scss';
 
-function DashboardView({userData, updateUsrImg}) {
+function DashboardView({userData, posts, updateUsrImg, fetchPosts}) {
 
-  if (!userData)
+  const [fetched, setFetched] = useState(false);
+
+  useEffect(() => {
+
+    if (!fetched) {
+
+      fetchPosts();
+      setFetched(true);
+
+    }
+
+  }, [fetched])
+
+  if (!userData || !posts || !fetched)
     return <h1>Loading...</h1>
 
   const { username, img_url } = userData.user;
@@ -96,6 +110,14 @@ function DashboardView({userData, updateUsrImg}) {
 
       </div>
 
+      <div className='my-posts'>
+
+        <h2>My Posts:</h2>
+
+        {posts.reverse().filter(post => post.author === username).map((post, id) => <Post key={id} post={post} />)}
+
+      </div>
+
       <div className='change-bg'></div>
 
       <div className='change-image'>
@@ -126,10 +148,11 @@ function stateToProps(state) {
 
   return {
 
-    userData: state.userData
+    userData: state.userData,
+    posts: state.posts
 
   }
 
 }
 
-export default connect(stateToProps, { updateUsrImg })(DashboardView);
+export default connect(stateToProps, { updateUsrImg, fetchPosts })(DashboardView);
