@@ -4,6 +4,8 @@ import React from 'react';
 
 import NavBar from '../components/NavBar';
 
+import './QuizzesView.scss';
+
 function QuizzesView() {
 
   return (
@@ -14,7 +16,17 @@ function QuizzesView() {
 
       <div className='quizzes'>
 
-        <h1>quizzes!</h1>
+        <div className='quizzes-header'>
+
+          <h1>Quizzes</h1>
+
+        </div>
+
+        <div className='quiz-list'>
+
+          
+
+        </div>
 
       </div>
 

@@ -1,0 +1,36 @@
+.quizzes {
+
+  margin-top: 66px;
+
+  .quizzes-header {
+
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+
+    h1 {
+
+      text-align: center;
+      margin: 10px 0;
+
+    }
+
+    a {
+
+      margin: 10px auto;
+      text-align: center;
+      font-size: 1.4rem;
+      position: absolute;
+      right: 10px;
+      top: 5px;
+
+    }
+
+  }
+
+}
