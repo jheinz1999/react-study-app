@@ -125,7 +125,7 @@ function PostView({match, history, userData, deletePost, deleteStatus, commentDe
         </div>
 
         {post && <Comment isFirst commentData={op} />}
-        {post && commentsLoaded && comments.map((comment, id) => <Comment commentData={comment} key={id} />)}
+        {post && commentsLoaded && comments.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((comment, id) => <Comment commentData={comment} key={id} />)}
 
         <form className='comment-form' onSubmit={handleSubmit}>
 
