@@ -25,6 +25,8 @@ export const ADD_POST_FAIL = 'ADD_POST_FAIL';
 export const DELETE_POST = 'DELETE_POST';
 export const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
 export const COMMENT_DELETE = 'COMMENT_DELETE';
+export const UPDATE_IMG_SUCCESS = 'UPDATE_IMG_SUCCESS';
+export const UPDATE_IMG_FAIL = 'UPDATE_IMG_FAIL';
 
 export const checkEmail = email => dispatch => {
 
@@ -129,9 +131,29 @@ export const logout = () => {
 
 }
 
-export const updateUsrImg = img => dispatch => {
+export const updateUsrImg = (img, password) => dispatch => {
 
-  alert('this feature is not ready yet.');
+  const options = {
+
+    headers: {
+
+      Authorization: JSON.parse(localStorage.user).token
+
+    }
+
+  }
+
+  axios.patch('https://lambda-study-app.herokuapp.com/api/auth/update', {
+    currentPassword: password,
+    newImg: img
+  }, options)
+  .then(res => dispatch({
+    type: UPDATE_IMG_SUCCESS,
+    payload: res.data.user.img_url
+  }))
+  .catch(err => dispatch({
+    type: UPDATE_IMG_FAIL
+  }));
 
 }
 

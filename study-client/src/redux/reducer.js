@@ -2,7 +2,7 @@
 
 import { EMAIL_CHECK, SUCCESS, FAILURE, ACKNOWLEDGEMENT, EMAIL, PASSWORD, SIGNUP, LOGGED_IN, LOGIN_STATUS, SIGNUP_SUCCESS, SIGNUP_FAIL,
 LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_POSTS_SUCCESS, GET_POSTS_FAIL, ADD_POST_SUCCESS, ADD_POST_FAIL, DELETE_POST,
-COMMENT_SUCCESS, COMMENT_DELETE } from './actions';
+COMMENT_SUCCESS, COMMENT_DELETE, UPDATE_IMG_FAIL, UPDATE_IMG_SUCCESS } from './actions';
 
 const initialState = {
 
@@ -79,6 +79,15 @@ export default (state = initialState, action) => {
     case COMMENT_DELETE:
 
       return {...state, commentDeleted: true}
+
+    case UPDATE_IMG_SUCCESS:
+
+      return {...state, userData: {...state.userData, user: {...state.userData.user, img_url: action.payload}}}
+
+    case UPDATE_IMG_FAIL:
+
+      console.log("FAIL");
+      break;
 
     default:
       return state;

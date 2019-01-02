@@ -20,6 +20,7 @@ function DashboardView({userData, updateUsrImg}) {
   const [modal, showModal] = useState(false);
   const [imgInput, setImgInput] = useState('');
   const [imgGood, setImgGood] = useState(false);
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
 
@@ -49,6 +50,12 @@ function DashboardView({userData, updateUsrImg}) {
 
   }
 
+  const handlePwdChange = e => {
+
+    setPassword(e.target.value);
+
+  }
+
   const checkImgLink = link => {
 
     let img = new Image();
@@ -62,9 +69,10 @@ function DashboardView({userData, updateUsrImg}) {
 
     e.preventDefault();
 
-    updateUsrImg(imgInput);
+    updateUsrImg(imgInput, password);
     showModal(false);
     setImgInput('');
+    setPassword('');
 
   }
 
@@ -101,6 +109,7 @@ function DashboardView({userData, updateUsrImg}) {
         <form onSubmit={submitForm}>
 
           <input type='text' value={imgInput} placeholder='image url' onChange={handleImgChange} required /><br/>
+          <input type='password' value={password} placeholder='password' onChange={handlePwdChange} required /><br/>
           <button disabled={!imgGood}>Submit!</button>
 
         </form>
