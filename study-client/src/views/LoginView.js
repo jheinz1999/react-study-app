@@ -12,7 +12,7 @@ import SignupForm from '../components/SignupForm';
 
 import './LoginView.scss';
 
-function LoginView({loginStatus, loginToken}) {
+function LoginView({loginStatus}) {
 
   let text;
 
@@ -32,8 +32,7 @@ function LoginView({loginStatus, loginToken}) {
 
   }
 
-  if (localStorage.user)
-    loginToken(JSON.parse(localStorage.user));
+  console.log('whats happenin');
 
   return (
 

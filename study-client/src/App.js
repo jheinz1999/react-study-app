@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { LOGGED_IN } from './redux/actions';
+import { loginToken } from './redux/actions';
 
 import LoginView from './views/LoginView';
 import DashboardView from './views/DashboardView';
@@ -14,23 +14,29 @@ import CreatePostView from './views/CreatePostView';
 
 class App extends Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
 
-    if (!this.props.userData && prevProps.userData) {
+    if (!localStorage.user && this.props.location.pathname !== '/login') {
+
+      console.log('logged out');
       this.props.history.push('/login');
+
     }
 
   }
 
   render() {
+
+    if (localStorage.user && !this.props.userData) {
+
+      this.props.loginToken(JSON.parse(localStorage.user));
+      console.log('logged in???');
+
+    }
+
     return (
 
       <div className='app'>
-
-        <Route
-          path='/'
-          render={() => !this.props.userData && this.props.location.pathname !== '/login' && <Redirect to='/login' />}
-        />
 
         <Route
           path='/login'
@@ -82,4 +88,4 @@ function stateToProps(state) {
 
 }
 
-export default withRouter(connect(stateToProps, null)(App));
+export default withRouter(connect(stateToProps, { loginToken })(App));

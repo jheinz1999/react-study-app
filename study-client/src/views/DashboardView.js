@@ -11,7 +11,7 @@ import config from '../config';
 
 import './DashboardView.scss';
 
-function DashboardView({userData, posts, updateUsrImg, fetchPosts}) {
+function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus}) {
 
   const [fetched, setFetched] = useState(false);
 
@@ -25,9 +25,6 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts}) {
     }
 
   }, [fetched])
-
-  if (!userData || !posts || !fetched)
-    return <h1>Loading...</h1>
 
   const { username, img_url } = userData.user;
 
@@ -90,6 +87,12 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts}) {
 
   }
 
+  if (!userData || !posts || !fetched)
+    return <h1>Loading...</h1>
+
+  if (loginStatus === 'EMAIL')
+    console.log("ABSDASJD");
+
   return (
 
     <>
@@ -149,7 +152,8 @@ function stateToProps(state) {
   return {
 
     userData: state.userData,
-    posts: state.posts
+    posts: state.posts,
+    loginStatus: state.loginStatus
 
   }
 
