@@ -20,8 +20,6 @@ function Post({post, history, loading}) {
 
   const { id, title, created_at, author } = post;
 
-  console.log(created_at);
-
   return (
 
     <div className='post' onClick={() => history.push(`/post/${id}`)}>

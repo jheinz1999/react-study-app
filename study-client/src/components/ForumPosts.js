@@ -22,12 +22,10 @@ function ForumPosts({posts, fetchPosts}) {
   if (!posts)
     return <Post loading />
 
-
-
   return (
 
     <>
-      {posts.reverse().map((post, id) => <Post key={id} post={post} />)}
+      {posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map((post, id) => <Post key={id} post={post} />)}
     </>
 
   );
