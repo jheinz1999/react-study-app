@@ -4,7 +4,10 @@ import React from 'react';
 
 import NavBar from '../components/NavBar';
 
-function QuizView() {
+function QuizView({history}) {
+
+  if (!localStorage.user)
+    history.push('/login');
 
   return (
 

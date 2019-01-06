@@ -6,7 +6,10 @@ import NavBar from '../components/NavBar';
 
 import './QuizzesView.scss';
 
-function QuizzesView() {
+function QuizzesView({history}) {
+
+  if (!localStorage.user)
+    history.push('/login');
 
   return (
 
@@ -24,7 +27,7 @@ function QuizzesView() {
 
         <div className='quiz-list'>
 
-          
+
 
         </div>
 

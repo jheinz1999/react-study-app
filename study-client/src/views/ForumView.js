@@ -8,7 +8,13 @@ import ForumPosts from '../components/ForumPosts';
 
 import './ForumView.scss';
 
-function ForumView() {
+function ForumView({history}) {
+
+  if (!localStorage.user) {
+
+    history.push('/login');
+
+  }
 
   return (
 

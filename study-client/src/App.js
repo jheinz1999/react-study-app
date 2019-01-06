@@ -58,12 +58,12 @@ class App extends Component {
 
         <Route
           path='/quizzes'
-          render={() => <QuizzesView />}
+          render={props => <QuizzesView {...props} />}
         />
 
         <Route
           path='/quiz/:id'
-          render={() => <QuizView />}
+          render={props => <QuizView {...props} />}
         />
 
         <Route
