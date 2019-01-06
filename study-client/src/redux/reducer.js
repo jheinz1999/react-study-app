@@ -2,7 +2,7 @@
 
 import { EMAIL_CHECK, SUCCESS, FAILURE, ACKNOWLEDGEMENT, EMAIL, PASSWORD, SIGNUP, LOGGED_IN, LOGIN_STATUS, SIGNUP_SUCCESS, SIGNUP_FAIL,
 LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_POSTS_SUCCESS, GET_POSTS_FAIL, ADD_POST_SUCCESS, ADD_POST_FAIL, DELETE_POST,
-COMMENT_SUCCESS, COMMENT_DELETE, UPDATE_IMG_FAIL, UPDATE_IMG_SUCCESS } from './actions';
+COMMENT_SUCCESS, COMMENT_DELETE, UPDATE_IMG_FAIL, UPDATE_IMG_SUCCESS, QUIZ_SUCCESS, QUIZ_FAIL } from './actions';
 
 const initialState = {
 
@@ -16,7 +16,8 @@ const initialState = {
   addStatus: null,
   deleteStatus: null,
   commentStatus: null,
-  commentDeleted: true
+  commentDeleted: true,
+  quizzes: null
 
 }
 
@@ -89,6 +90,10 @@ export default (state = initialState, action) => {
 
       console.log("FAIL");
       break;
+
+    case QUIZ_SUCCESS:
+
+      return {...state, quizzes: action.payload}
 
     default:
       return state;

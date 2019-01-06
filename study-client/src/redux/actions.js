@@ -27,6 +27,8 @@ export const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
 export const COMMENT_DELETE = 'COMMENT_DELETE';
 export const UPDATE_IMG_SUCCESS = 'UPDATE_IMG_SUCCESS';
 export const UPDATE_IMG_FAIL = 'UPDATE_IMG_FAIL';
+export const QUIZ_SUCCESS = 'QUIZ_SUCCESS';
+export const QUIZ_FAIL = 'QUIZ_FAIL';
 
 export const checkEmail = email => dispatch => {
 
@@ -257,6 +259,19 @@ export const deleteComment = (postID, id) => dispatch => {
     }))
     .catch(err => dispatch({
       type: LOGOUT
+    }));
+
+}
+
+export const fetchQuizzes = () => dispatch => {
+
+  axios.get('https://lambda-study-app.herokuapp.com/api/quizzes/')
+    .then(res => dispatch({
+      type: QUIZ_SUCCESS,
+      payload: res.data
+    }))
+    .catch(err => dispatch({
+      type: QUIZ_FAIL
     }));
 
 }
