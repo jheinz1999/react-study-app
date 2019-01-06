@@ -21,7 +21,7 @@ function NavBar({logout}) {
       <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
       <NavLink className='nav-item' to='/board'>Forum</NavLink>
       <NavLink className='nav-item' to='/quizzes'>Quizzes</NavLink>
-      <span className='nav-item' onClick={() => logout()}>Log Out</span>
+      <span className='nav-item' onClick={logout}>Log Out</span>
       <i className='nav-item fa fa-bars' onClick={() => toggleLinks()}></i>
 
     </nav>

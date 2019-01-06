@@ -11,7 +11,12 @@ import config from '../config';
 
 import './DashboardView.scss';
 
-function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus}) {
+function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, history}) {
+
+  if (!userData) {
+    history.push('/login');
+    return null;
+  }
 
   const [fetched, setFetched] = useState(false);
 
@@ -87,11 +92,8 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus})
 
   }
 
-  if (!userData || !posts || !fetched)
+  if (!posts || !fetched)
     return <h1>Loading...</h1>
-
-  if (loginStatus === 'EMAIL')
-    console.log("ABSDASJD");
 
   return (
 

@@ -34,9 +34,17 @@ class App extends Component {
 
     }
 
+    console.log('rendering bro');
+
     return (
 
       <div className='app'>
+
+        <Route
+          exact
+          path='/'
+          render={() => localStorage.user ? <Redirect to='/dashboard' /> : <Redirect to='/login' />}
+        />
 
         <Route
           path='/login'
@@ -45,7 +53,7 @@ class App extends Component {
 
         <Route
           path='/dashboard'
-          render={() => <DashboardView />}
+          render={props => <DashboardView {...props} />}
         />
 
         <Route
@@ -60,7 +68,7 @@ class App extends Component {
 
         <Route
           path='/board'
-          render={() => <ForumView />}
+          render={props => <ForumView {...props} />}
         />
 
         <Route

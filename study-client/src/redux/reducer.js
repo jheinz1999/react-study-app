@@ -53,6 +53,7 @@ export default (state = initialState, action) => {
 
     case LOGOUT:
 
+      console.log('we logged out');
       localStorage.clear();
       return {...state, userData: null, loginStatus: EMAIL}
 
