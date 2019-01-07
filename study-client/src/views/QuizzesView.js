@@ -28,9 +28,6 @@ function QuizzesView({history, quizzes, fetchQuizzes}) {
 
   }, [fetched]);
 
-  if (!fetched || !quizzes)
-    return <h1>Loading...</h1>
-
   return (
 
     <>
@@ -41,13 +38,13 @@ function QuizzesView({history, quizzes, fetchQuizzes}) {
 
         <div className='quizzes-header'>
 
-          <h1>Quizzes</h1>
+          <h1>{fetched && quizzes ? 'Quizzes' : 'Loading...'}</h1>
 
         </div>
 
         <div className='quiz-list'>
 
-          {quizzes.filter(quiz => quiz.question_count !== 0).map((quiz, id) => <QuizPreview key={id} quiz={quiz} />)}
+          {fetched && quizzes && quizzes.filter(quiz => quiz.question_count !== 0).map((quiz, id) => <QuizPreview key={id} quiz={quiz} />)}
 
         </div>
 

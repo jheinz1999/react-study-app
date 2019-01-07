@@ -92,9 +92,6 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
 
   }
 
-  if (!posts || !fetched)
-    return <h1>Loading...</h1>
-
   return (
 
     <>
@@ -119,7 +116,7 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
 
         <h2>My Posts:</h2>
 
-        {posts.reverse().filter(post => post.author === username).map((post, id) => <Post key={id} post={post} />)}
+        {(posts && fetched) ? posts.reverse().filter(post => post.author === username).map((post, id) => <Post key={id} post={post} />) : <Post loading />}
 
       </div>
 
