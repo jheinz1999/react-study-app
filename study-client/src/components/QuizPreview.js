@@ -1,14 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './QuizPreview.scss';
 
-function QuizPreview({quiz}) {
+function QuizPreview({quiz, history}) {
 
-  const { title, votes, description, author, topic, question_count } = quiz;
+  const { id, title, votes, description, author, topic, question_count } = quiz;
 
   return (
 
-    <div className='quiz-preview'>
+    <div className='quiz-preview' onClick={() => history.push(`/quiz/${id}`)}>
 
       <h3>{title}</h3>
 
@@ -26,4 +27,4 @@ function QuizPreview({quiz}) {
 
 }
 
-export default QuizPreview;
+export default withRouter(QuizPreview);
