@@ -20,7 +20,9 @@ class QuizView extends React.Component {
       questions: null,
       gameState: 'PREVIEW',
       currentQuestion: 0,
-      selection: -1
+      selection: -1,
+      numCorrect: 0,
+      loadingNext: false
 
     }
 
@@ -29,6 +31,20 @@ class QuizView extends React.Component {
   setSelection = (id) => {
 
     this.setState({selection: id});
+
+  }
+
+  submit = (questionID, option) => {
+
+    this.setState({loadingNext: true});
+
+    axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}/questions/${questionID}/response?option=${option}`)
+      .then(res => {
+        if (res.data.correct)
+          this.setState({numCorrect: this.state.numCorrect + 1});
+        this.setState({currentQuestion: this.state.currentQuestion + 1, selection: -1, loadingNext: false});
+      })
+      .catch(err => console.log(err));
 
   }
 
@@ -70,6 +86,11 @@ class QuizView extends React.Component {
 
   renderQuestions() {
 
+    if (this.state.currentQuestion >= this.state.questions.length) {
+      this.setState({gameState: 'FINISHED'});
+      return;
+    }
+
     const currentQuestion = this.state.questions[this.state.currentQuestion];
 
     const { id, question, options } = currentQuestion;
@@ -86,7 +107,31 @@ class QuizView extends React.Component {
 
         {options.map((option, index) => <QuizOption setSelection={this.setSelection} data={option} selected={index === this.state.selection} key={index} id={index} />)}
 
-        <button disabled={this.state.selection === -1}>Submit!</button>
+        <button onClick={() => this.submit(id, this.state.selection)} disabled={this.state.selection === -1 || this.state.loadingNext}>{this.state.loadingNext ? 'Loading...' : 'Submit!'}</button>
+
+      </div>
+
+    );
+
+  }
+
+  renderEndGame() {
+
+    return (
+
+      <div className='end-game'>
+
+        <div className='heading'>
+
+          <h1>Results</h1>
+
+        </div>
+
+        <div className='body'>
+
+          <p>Questions correct: {this.state.numCorrect} / {this.state.questions.length}</p>
+
+        </div>
 
       </div>
 
@@ -119,6 +164,8 @@ class QuizView extends React.Component {
           {gameState === 'PREVIEW' && this.renderPreview()}
 
           {gameState === 'PLAYING' && this.renderQuestions()}
+
+          {gameState === 'FINISHED' && this.renderEndGame()}
 
         </div>
 

@@ -50,4 +50,38 @@
 
   }
 
+  .end-game {
+
+    .heading {
+
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 10px;
+      width: 70%;
+      text-align: center;
+      padding: 10px;
+      margin: auto;
+      margin-bottom: 20px;
+
+    }
+
+    .body {
+
+      background-color: lightgrey;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      width: 60%;
+      padding: 10px;
+      margin: 0 auto;
+
+      p {
+
+        text-align: center;
+
+      }
+
+    }
+
+  }
+
 }
