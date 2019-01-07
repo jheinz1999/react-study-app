@@ -7,43 +7,38 @@ import NavBar from '../components/NavBar';
 
 import './QuizView.scss';
 
-function QuizView({history, match}) {
+class QuizView extends React.Component {
 
-  if (!localStorage.user)
-    history.push('/login');
+  constructor() {
 
-  const [quiz, setQuiz] = useState(null);
-  const [fetched, setFetched] = useState(false);
+    super();
 
-  useEffect(() => {
+    this.state = {
 
-    if (!fetched) {
-
-      axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${match.params.id}`)
-        .then(res => setQuiz(res.data))
-        .catch(err => setQuiz('error'));
-
-      setFetched(true);
+      quiz: null,
+      questions: null,
+      gameState: 'PREVIEW',
+      currentQuestion: 0
 
     }
 
-  }, [fetched]);
+  }
 
-  if (!quiz)
-    return <h1>Loading...</h1>
+  componentDidMount() {
 
-  if (quiz === 'error')
-    return <h1>Quiz not found!</h1>
+    axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}`)
+      .then(res => this.setState({quiz: res.data}))
+      .catch(err => this.setState({quiz: 'error'}));
 
-  const { title, votes, author, topic, question_count } = quiz;
+  }
 
-  return (
+  renderPreview() {
 
-    <>
+    const { title, votes, author, topic, question_count } = this.state.quiz;
 
-      <NavBar />
+    return (
 
-      <div className='quiz'>
+      <div className='preview'>
 
         <h1>{title}</h1>
 
@@ -53,13 +48,61 @@ function QuizView({history, match}) {
 
         <p>Number of questions: {question_count}</p>
 
-        <button>Start Quiz!</button>
+        <button onClick={() => this.setState({gameState: 'PLAYING'})}>Start Quiz!</button>
 
       </div>
 
-    </>
+    )
 
-  );
+  }
+
+  renderQuestions() {
+
+    return (
+
+      <div className='question'>
+
+
+
+      </div>
+
+    );
+
+  }
+
+  render() {
+
+    const { history } = this.props;
+    const { gameState, quiz } = this.state;
+
+    if (!localStorage.user)
+      history.push('/login');
+
+    if (!quiz)
+      return <h1>Loading...</h1>
+
+    if (quiz === 'error')
+      return <h1>Quiz not found!</h1>
+
+    return (
+
+      <>
+
+        <NavBar />
+
+        <div className='quiz'>
+
+          {gameState === 'PREVIEW' && this.renderPreview()}
+
+          {gameState === 'PLAYING' && this.renderQuestions()}
+
+        </div>
+
+      </>
+
+    );
+
+  }
 
 }
 
