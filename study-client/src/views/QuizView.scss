@@ -3,16 +3,50 @@
   margin: auto;
   margin-top: 66px;
 
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 70%;
-  text-align: center;
-  padding: 10px;
-
   p {
 
     margin: 10px 0;
+
+  }
+
+  .question {
+
+    width: 100%;
+    text-align: center;
+
+    .heading {
+
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 10px;
+      width: 70%;
+      text-align: center;
+      padding: 10px;
+      margin: auto;
+      margin-bottom: 20px;
+
+    }
+
+    button {
+
+      margin: 15px auto;
+      text-align: center;
+      width: 50%;
+      padding: 10px;
+
+    }
+
+  }
+
+  .preview {
+
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 70%;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
 
   }
 

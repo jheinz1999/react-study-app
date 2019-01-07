@@ -1,0 +1,28 @@
+.quiz-option {
+
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  background-color: lightblue;
+  margin: 10px auto;
+  cursor: pointer;
+
+  &:hover {
+
+    background-color: lighten(lightblue, 5%);
+
+  }
+
+}
+
+.quiz-option-selected {
+
+  background-color: lightgreen;
+
+  &:hover {
+
+    background-color: lighten(lightgreen, 5%);
+
+  }
+
+}
