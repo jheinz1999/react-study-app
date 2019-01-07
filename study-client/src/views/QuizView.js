@@ -51,10 +51,44 @@ class QuizView extends React.Component {
 
   }
 
+  setUserData = () => {
+
+    const options = {
+
+      headers: {
+
+        Authorization: JSON.parse(localStorage.user).token
+
+      }
+
+    }
+
+    console.log(this.state.vote);
+
+    axios.patch(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}`, {
+      vote: this.state.vote,
+      score: this.state.numCorrect,
+      favorite: this.state.favorite
+    }, options)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+
+  }
+
   componentDidMount() {
 
-    axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}`)
-      .then(res => this.setState({quiz: res.data}))
+    const options = {
+
+      headers: {
+
+        Authorization: JSON.parse(localStorage.user).token
+
+      }
+
+    }
+
+    axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}`, options)
+      .then(res => this.setState({quiz: res.data, vote: res.data.user_vote}))
       .catch(err => this.setState({quiz: 'error'}));
 
     axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}/questions`)
@@ -65,7 +99,7 @@ class QuizView extends React.Component {
 
   renderPreview() {
 
-    const { title, votes, author, topic, question_count } = this.state.quiz;
+    const { title, votes, author, topic, question_count, user_vote } = this.state.quiz;
 
     return (
 
@@ -136,13 +170,19 @@ class QuizView extends React.Component {
 
           <h3>Did you like this quiz?</h3>
 
-          <i onClick={() => this.state.vote !== 1 ? this.setState({vote: 1}) : this.setState({vote: 0})} className={this.state.vote > 0 ? 'fa fa-thumbs-up' : 'far fa-thumbs-up'}></i>
+          <i onClick={() => {
+            this.state.vote !== 1 ? this.setState({vote: 1}, () => this.setUserData()) : this.setState({vote: 0}, () => this.setUserData());
+          }} className={this.state.vote > 0 ? 'fa fa-thumbs-up' : 'far fa-thumbs-up'}></i>
 
-          <i onClick={() => this.state.vote !== -1 ? this.setState({vote: -1}) : this.setState({vote: 0})} className={this.state.vote < 0 ? 'fa fa-thumbs-down' : 'far fa-thumbs-down'}></i>
+          <i onClick={() => {
+            this.state.vote !== -1 ? this.setState({vote: -1}, () => this.setUserData()) : this.setState({vote: 0}, () => this.setUserData());
+          }} className={this.state.vote < 0 ? 'fa fa-thumbs-down' : 'far fa-thumbs-down'}></i>
 
           <p>If you really liked this quiz or would like to come back to it later, add it to your starred quizzes!</p>
 
-          <i onClick={() => this.setState({favorited: !this.state.favorited})} className={this.state.favorited ? 'fa fa-star' : 'far fa-star'}></i>
+          <i onClick={() => {
+            this.setState({favorite: !this.state.favorite}, () => this.setUserData());
+          }} className={this.state.favorite ? 'fa fa-star' : 'far fa-star'}></i>
 
           <br /><button onClick={() => this.props.history.push('/quizzes')}>Back to quizzes</button>
 

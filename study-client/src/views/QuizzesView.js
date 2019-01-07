@@ -17,6 +17,8 @@ function QuizzesView({history, quizzes, fetchQuizzes}) {
 
   const [fetched, setFetched] = useState(false);
 
+  console.log('FETCHED',fetched);
+
   useEffect(() => {
 
     if (!fetched) {
