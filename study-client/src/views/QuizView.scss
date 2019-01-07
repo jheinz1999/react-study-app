@@ -73,10 +73,57 @@
       width: 60%;
       padding: 10px;
       margin: 0 auto;
+      text-align: center;
 
-      p {
+      h1, h2, h3 {
 
-        text-align: center;
+        margin: 10px;
+
+      }
+
+      i {
+
+        font-size: 6rem;
+        cursor: pointer;
+
+      }
+
+      .fa-thumbs-up {
+
+        color: green;
+        margin-right: 10px;
+
+        &:hover {
+
+          color: lighten(green, 5%);
+
+        }
+
+      }
+
+      .fa-thumbs-down {
+
+        color: red;
+        margin-left: 10px;
+
+        &:hover {
+
+          color: lighten(red, 20%);
+
+        }
+
+      }
+
+      .fa {
+
+        font-size: 8rem;
+
+      }
+
+      .fa-star {
+
+        color: yellow;
+        margin-bottom: 10px;
 
       }
 

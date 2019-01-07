@@ -22,7 +22,9 @@ class QuizView extends React.Component {
       currentQuestion: 0,
       selection: -1,
       numCorrect: 0,
-      loadingNext: false
+      loadingNext: false,
+      vote: 0,
+      favorite: false
 
     }
 
@@ -40,6 +42,7 @@ class QuizView extends React.Component {
 
     axios.get(`https://lambda-study-app.herokuapp.com/api/quizzes/${this.props.match.params.id}/questions/${questionID}/response?option=${option}`)
       .then(res => {
+        console.log(res.data.correct);
         if (res.data.correct)
           this.setState({numCorrect: this.state.numCorrect + 1});
         this.setState({currentQuestion: this.state.currentQuestion + 1, selection: -1, loadingNext: false});
@@ -129,7 +132,19 @@ class QuizView extends React.Component {
 
         <div className='body'>
 
-          <p>Questions correct: {this.state.numCorrect} / {this.state.questions.length}</p>
+          <h2>Questions correct: {this.state.numCorrect} / {this.state.questions.length}</h2>
+
+          <h3>Did you like this quiz?</h3>
+
+          <i onClick={() => this.state.vote !== 1 ? this.setState({vote: 1}) : this.setState({vote: 0})} className={this.state.vote > 0 ? 'fa fa-thumbs-up' : 'far fa-thumbs-up'}></i>
+
+          <i onClick={() => this.state.vote !== -1 ? this.setState({vote: -1}) : this.setState({vote: 0})} className={this.state.vote < 0 ? 'fa fa-thumbs-down' : 'far fa-thumbs-down'}></i>
+
+          <p>If you really liked this quiz or would like to come back to it later, add it to your starred quizzes!</p>
+
+          <i onClick={() => this.setState({favorited: !this.state.favorited})} className={this.state.favorited ? 'fa fa-star' : 'far fa-star'}></i>
+
+          <br /><button onClick={() => this.props.history.push('/quizzes')}>Back to quizzes</button>
 
         </div>
 
