@@ -11,6 +11,7 @@ import QuizView from './views/QuizView';
 import ForumView from './views/ForumView';
 import PostView from './views/PostView';
 import CreatePostView from './views/CreatePostView';
+import CreateQuizView from './views/CreateQuizView';
 
 class App extends Component {
 
@@ -79,6 +80,11 @@ class App extends Component {
         <Route
           path='/create/post'
           render={props => <CreatePostView {...props} />}
+        />
+
+        <Route
+          path='/create/quiz'
+          render={props => <CreateQuizView {...props} />}
         />
 
       </div>

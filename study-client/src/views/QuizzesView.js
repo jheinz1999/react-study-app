@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchQuizzes } from '../redux/actions';
 
@@ -41,6 +42,7 @@ function QuizzesView({history, quizzes, fetchQuizzes}) {
         <div className='quizzes-header'>
 
           <h1>{fetched && quizzes ? 'Quizzes' : 'Loading...'}</h1>
+          <Link to='/create/quiz'>+Create Quiz</Link>
 
         </div>
 

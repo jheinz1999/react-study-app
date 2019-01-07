@@ -144,7 +144,7 @@ class QuizView extends React.Component {
 
         {options.map((option, index) => <QuizOption setSelection={this.setSelection} data={option} selected={index === this.state.selection} key={index} id={index} />)}
 
-        <button onClick={() => this.submit(id, this.state.selection)} disabled={this.state.selection === -1 || this.state.loadingNext}>{this.state.loadingNext ? 'Loading...' : 'Submit!'}</button>
+        <button onClick={() => this.submit(id, this.state.selection + 1)} disabled={this.state.selection === -1 || this.state.loadingNext}>{this.state.loadingNext ? 'Loading...' : 'Submit!'}</button>
 
       </div>
 
