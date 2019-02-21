@@ -20,7 +20,8 @@ class CreateQuizView extends React.Component {
       option2: '',
       option3: '',
       option4: '',
-      answer: '1'
+      answer: '1',
+      questions: []
 
     }
 
@@ -29,7 +30,7 @@ class CreateQuizView extends React.Component {
   componentDidMount() {
 
     axios.get('https://lambda-study-app.herokuapp.com/api/quizzes/topics')
-      .then(res => this.setState({topics: res.data}))
+      .then(res => this.setState({topics: res.data, topic: res.data[0]}))
       .catch(err => console.log(err));
 
   }
@@ -62,9 +63,10 @@ class CreateQuizView extends React.Component {
     }, options)
       .then(res => {
 
-        
+        this.props.history.push('/dashboard');
 
       })
+      .catch(err => console.log(err));
 
   }
 
@@ -78,7 +80,7 @@ class CreateQuizView extends React.Component {
 
         <form onSubmit={this.handleSubmit} className='create-quiz-form'>
 
-          <input type='text' name='title' placeholder='question' value={this.state.title} onChange={this.handleChange} required /><br/>
+          <input type='text' name='title' placeholder='quiz title' value={this.state.title} onChange={this.handleChange} required /><br/>
 
           <p>Topic: </p>
 

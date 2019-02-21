@@ -4,14 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TweenMax } from 'gsap/TweenMax';
 
-import { updateUsrImg, fetchPosts } from '../redux/actions';
+import { updateUsrImg, fetchPosts, fetchQuizzes } from '../redux/actions';
 import NavBar from '../components/NavBar';
 import Post from '../components/Post';
+import QuizPreview from '../components/QuizPreview';
 import config from '../config';
 
 import './DashboardView.scss';
 
-function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, history}) {
+function DashboardView({userData, posts, quizzes, updateUsrImg, fetchPosts, fetchQuizzes, loginStatus, history}) {
 
   if (!userData) {
     history.push('/login');
@@ -19,6 +20,7 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
   }
 
   const [fetched, setFetched] = useState(false);
+  const [qFetched, setQFetched] = useState(false);
 
   useEffect(() => {
 
@@ -29,7 +31,18 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
 
     }
 
-  }, [fetched])
+  }, [fetched]);
+
+  useEffect(() => {
+
+    if (!qFetched) {
+
+      fetchQuizzes();
+      setQFetched(true);
+
+    }
+
+  }, [qFetched]);
 
   const { username, img_url } = userData.user;
 
@@ -92,6 +105,8 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
 
   }
 
+  console.log(quizzes);
+
   return (
 
     <>
@@ -117,6 +132,14 @@ function DashboardView({userData, posts, updateUsrImg, fetchPosts, loginStatus, 
         <h2>My Posts:</h2>
 
         {(posts && fetched) ? posts.reverse().filter(post => post.author === username).map((post, id) => <Post key={id} post={post} />) : <Post loading />}
+
+      </div>
+
+      <div className='my-quizzes'>
+
+        <h2>My Quizzes:</h2>
+
+        {(quizzes && qFetched) && quizzes.reverse().filter(quiz => quiz.author === username).map((quiz, id) => <QuizPreview key={id} quiz={quiz} />)}
 
       </div>
 
@@ -152,10 +175,11 @@ function stateToProps(state) {
 
     userData: state.userData,
     posts: state.posts,
-    loginStatus: state.loginStatus
+    loginStatus: state.loginStatus,
+    quizzes: state.quizzes
 
   }
 
 }
 
-export default connect(stateToProps, { updateUsrImg, fetchPosts })(DashboardView);
+export default connect(stateToProps, { updateUsrImg, fetchPosts, fetchQuizzes })(DashboardView);
